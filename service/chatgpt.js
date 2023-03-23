@@ -1,4 +1,5 @@
 const axios = require('axios')
+require('dotenv').config()
 
 OPEN_AI_TOKEN = process.env.OPEN_AI_TOKEN
 
