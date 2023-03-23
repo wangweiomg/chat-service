@@ -20,7 +20,10 @@ bot.on(message('text'), async (ctx) => {
     ctx.sendChatAction("typing")
     
     const res = await chat(ctx.message.text)
-    const resp = res.data.choices[0].message.content
+
+    console.log('res-->', typeof(res), res)
+
+    const resp = res || "System error, please wait a moment"
 
     await ctx.telegram.sendMessage(ctx.message.chat.id, resp);
 

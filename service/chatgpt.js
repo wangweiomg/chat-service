@@ -19,7 +19,16 @@ async function getChat(msg) {
         ]
     }
 
-    return await axios.post(url, data, config).catch(err => console.log(err))
+    return await axios.post(url, data, 
+        config).then( res=> {
+            const data = res.data.choices[0].message.content
+            console.log('axios result-->', data)
+            return data
+
+        }).catch(err => {
+            console.log(err)
+            return null
+        });
     
 }
 
