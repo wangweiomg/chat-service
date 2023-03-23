@@ -16,6 +16,9 @@ bot.command('quit', async (ctx) => {
 
 bot.on(message('text'), async (ctx) => {
 
+    // await ctx.telegram.sendChatAction()
+    ctx.sendChatAction("typing")
+    
     const res = await chat(ctx.message.text)
     const resp = res.data.choices[0].message.content
 
