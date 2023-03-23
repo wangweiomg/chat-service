@@ -20,6 +20,8 @@ async function getChat(msg) {
         ]
     }
 
+    console.log('send prompt-->', msg)
+
     return await axios.post(url, data, 
         config).then( res=> {
             const data = res.data.choices[0].message.content
