@@ -15,7 +15,7 @@ router.get('/', (ctx, next) => {
     ctx.body = 'Hello World'
 })
 
-router.get('/download', async(ctx) => {
+router.get('/download/clash', async(ctx) => {
     const filePath = '/home/weiw/tools/clash-armv7'
     const stat = fs.statSync(filePath); // 获取文件信息
     ctx.set({
@@ -26,7 +26,35 @@ router.get('/download', async(ctx) => {
 
     const stream = fs.createReadStream(filePath)
     ctx.body = stream;
-    
+
+})
+
+router.get('/download/yacd', async(ctx) => {
+    const filePath = '/home/weiw/tools/yacd.tar.gz'
+    const stat = fs.statSync(filePath); // 获取文件信息
+    ctx.set({
+        'Content-Type': 'application/octet-stream',
+        'Content-Disposition': `attachment; filename=${encodeURIComponent('yacd.tar.gz')}`, 
+        'Content-Length': stat.size
+    });
+
+    const stream = fs.createReadStream(filePath)
+    ctx.body = stream;
+
+})
+
+router.get('/download/gost', async(ctx) => {
+    const filePath = '/home/weiw/tools/gost-linux-armv7-2.11.5.gz'
+    const stat = fs.statSync(filePath); // 获取文件信息
+    ctx.set({
+        'Content-Type': 'application/octet-stream',
+        'Content-Disposition': `attachment; filename=${encodeURIComponent('gost.gz')}`, 
+        'Content-Length': stat.size
+    });
+
+    const stream = fs.createReadStream(filePath)
+    ctx.body = stream;
+
 })
 
 router.get('/chat', async (ctx, next) => {

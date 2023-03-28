@@ -6,7 +6,10 @@ module.exports = {
 
   {
     name: "koa-app",
-    script: "./koa-app.js"
+    script: "./koa-app.js",
+    // exec_mode: "cluster",
+    // instances: 3
+
   }
 ]
 }
