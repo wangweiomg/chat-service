@@ -1,6 +1,7 @@
 const Koa = require('koa')
 const Router = require('@koa/router')
 const bodyParser = require('koa-bodyparser')
+const fs = require('fs')
 
 const chat = require('./service/chatgpt')
 
@@ -12,6 +13,20 @@ const router = new Router()
 router.get('/', (ctx, next) => {
     // ctx.router available
     ctx.body = 'Hello World'
+})
+
+router.get('/download', async(ctx) => {
+    const filePath = '/home/weiw/tools/clash-armv7'
+    const stat = fs.statSync(filePath); // 获取文件信息
+    ctx.set({
+        'Content-Type': 'application/octet-stream',
+        'Content-Disposition': `attachment; filename=${encodeURIComponent('clash-linux-armv7')}`, 
+        'Content-Length': stat.size
+    });
+
+    const stream = fs.createReadStream(filePath)
+    ctx.body = stream;
+    
 })
 
 router.get('/chat', async (ctx, next) => {
