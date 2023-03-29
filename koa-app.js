@@ -29,7 +29,21 @@ router.get('/download/clash', async(ctx) => {
 
 })
 
-router.get('/download/yacd', async(ctx) => {
+router.get('/download/armv5.gz', async(ctx) => {
+    const filePath = '/home/weiw/tools/clash-linux-armv5-2023.03.18.gz'
+    const stat = fs.statSync(filePath); // 获取文件信息
+    ctx.set({
+        'Content-Type': 'application/octet-stream',
+        'Content-Disposition': `attachment; filename=${encodeURIComponent('armv5')}`, 
+        'Content-Length': stat.size
+    });
+
+    const stream = fs.createReadStream(filePath)
+    ctx.body = stream;
+
+})
+
+router.get('/download/yacd.tar.gz', async(ctx) => {
     const filePath = '/home/weiw/tools/yacd.tar.gz'
     const stat = fs.statSync(filePath); // 获取文件信息
     ctx.set({
@@ -43,8 +57,8 @@ router.get('/download/yacd', async(ctx) => {
 
 })
 
-router.get('/download/gost', async(ctx) => {
-    const filePath = '/home/weiw/tools/gost-linux-armv7-2.11.5.gz'
+router.get('/download/gost.gz', async(ctx) => {
+    const filePath = '/home/weiw/tools/gost-linux-armv5-2.11.5.gz'
     const stat = fs.statSync(filePath); // 获取文件信息
     ctx.set({
         'Content-Type': 'application/octet-stream',
